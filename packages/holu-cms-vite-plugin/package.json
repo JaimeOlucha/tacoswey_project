@@ -1,0 +1,16 @@
+{
+  "name": "@holu/cms-vite-plugin",
+  "version": "1.0.0",
+  "description": "Vite plugin that pre-renders holu CMS posts at build time",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./runtime": "./runtime.js",
+    "./holu-cms.css": "./holu-cms.css"
+  },
+  "keywords": ["vite", "plugin", "holu", "cms"],
+  "peerDependencies": {
+    "vite": ">=4.0.0"
+  }
+}

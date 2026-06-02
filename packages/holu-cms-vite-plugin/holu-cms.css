@@ -1,0 +1,375 @@
+/**
+ * @holu/cms-vite-plugin — holu-cms.css
+ *
+ * Base styles for holu CMS components.
+ * Customize by overriding CSS variables in your project:
+ *
+ *   :root {
+ *     --holu-primary: #your-color;
+ *     --holu-card-bg: #your-card-bg;
+ *     --holu-font: 'Your Font', sans-serif;
+ *   }
+ *
+ * Import in your main CSS or JS:
+ *   @import '@holu/cms-vite-plugin/holu-cms.css';
+ */
+
+/* ── Variables ────────────────────────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --holu-primary:        #009688;
+  --holu-primary-hover:  #00796b;
+
+  /* Typography */
+  --holu-font:           system-ui, -apple-system, sans-serif;
+  --holu-font-size-base: 1rem;
+  --holu-line-height:    1.6;
+
+  /* Colors */
+  --holu-text:           #111827;
+  --holu-text-muted:     #6b7280;
+  --holu-bg:             #f9fafb;
+  --holu-card-bg:        #ffffff;
+  --holu-card-border:    #e5e7eb;
+  --holu-tag-bg:         #f3f4f6;
+  --holu-tag-color:      #374151;
+  --holu-modal-bg:       #ffffff;
+  --holu-overlay-bg:     rgba(0, 0, 0, 0.65);
+
+  /* Shape */
+  --holu-radius-sm:      6px;
+  --holu-radius-md:      10px;
+  --holu-radius-lg:      16px;
+  --holu-radius-full:    9999px;
+
+  /* Shadow */
+  --holu-shadow-card:    0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+  --holu-shadow-modal:   0 8px 40px rgba(0,0,0,.18);
+
+  /* Motion */
+  --holu-transition:     0.25s ease;
+  --holu-anim-duration:  0.45s;
+}
+
+/* ── Grid ─────────────────────────────────────────────────────────────────── */
+.holu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  font-family: var(--holu-font);
+}
+
+@media (max-width: 900px) {
+  .holu-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .holu-grid { grid-template-columns: 1fr; gap: 1rem; }
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────── */
+.holu-card {
+  background: var(--holu-card-bg);
+  border: 1px solid var(--holu-card-border);
+  border-radius: var(--holu-radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--holu-shadow-card);
+  cursor: default;
+
+  opacity: 0;
+  transform: translateY(18px);
+  animation: holuCardIn var(--holu-anim-duration) cubic-bezier(0.22, 1, 0.36, 1)
+    calc(var(--holu-delay, 0ms)) forwards;
+
+  transition:
+    transform var(--holu-transition),
+    box-shadow var(--holu-transition),
+    border-color var(--holu-transition);
+}
+
+.holu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.12);
+  border-color: var(--holu-primary);
+}
+
+@keyframes holuCardIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Card cover ───────────────────────────────────────────────────────────── */
+.holu-card__cover {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--holu-tag-bg);
+}
+
+.holu-card__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.holu-card:hover .holu-card__cover img {
+  transform: scale(1.04);
+}
+
+/* ── Card body ────────────────────────────────────────────────────────────── */
+.holu-card__body {
+  padding: 1.25rem 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+/* ── Card number ──────────────────────────────────────────────────────────── */
+.holu-card__num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--holu-text-muted);
+  opacity: 0.6;
+}
+
+/* ── Tags ─────────────────────────────────────────────────────────────────── */
+.holu-card__tags,
+.holu-modal__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.holu-card__tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--holu-tag-bg);
+  color: var(--holu-tag-color);
+  border-radius: var(--holu-radius-full);
+  padding: 3px 10px;
+  line-height: 1.5;
+}
+
+/* ── Card title & desc ────────────────────────────────────────────────────── */
+.holu-card__title {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--holu-text);
+  margin: 0;
+}
+
+.holu-card__desc {
+  font-size: 0.875rem;
+  line-height: var(--holu-line-height);
+  color: var(--holu-text-muted);
+  margin: 0;
+  flex: 1;
+}
+
+/* ── Card CTA ─────────────────────────────────────────────────────────────── */
+.holu-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--holu-primary);
+  margin-top: 0.5rem;
+  transition: gap var(--holu-transition), color var(--holu-transition);
+}
+
+.holu-card__cta:hover {
+  color: var(--holu-primary-hover);
+  gap: 8px;
+}
+
+.holu-card__cta svg {
+  flex-shrink: 0;
+  transition: transform var(--holu-transition);
+}
+
+.holu-card__cta:hover svg {
+  transform: translateX(3px);
+}
+
+/* ── Empty state ──────────────────────────────────────────────────────────── */
+.holu-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--holu-text-muted);
+  font-family: var(--holu-font);
+  font-size: 0.95rem;
+}
+
+/* ── Modal ────────────────────────────────────────────────────────────────── */
+.holu-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+  font-family: var(--holu-font);
+}
+
+.holu-modal[hidden] {
+  display: none;
+}
+
+/* Backdrop */
+.holu-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--holu-overlay-bg);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+/* Panel */
+.holu-modal__panel {
+  position: relative;
+  background: var(--holu-modal-bg);
+  border-radius: var(--holu-radius-lg);
+  width: 100%;
+  max-width: 660px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--holu-shadow-modal);
+  animation: holuModalIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes holuModalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Close button */
+.holu-modal__close {
+  position: absolute;
+  top: 0.875rem;
+  right: 0.875rem;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--holu-tag-bg);
+  border: 1px solid var(--holu-card-border);
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--holu-text-muted);
+  transition: background var(--holu-transition), color var(--holu-transition);
+  z-index: 1;
+}
+
+.holu-modal__close:hover {
+  background: var(--holu-card-border);
+  color: var(--holu-text);
+}
+
+/* ── Carousel ─────────────────────────────────────────────────────────────── */
+.holu-modal__carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+  border-radius: var(--holu-radius-lg) var(--holu-radius-lg) 0 0;
+}
+
+.holu-modal__carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.holu-modal__carousel img[hidden] {
+  display: none;
+}
+
+.holu-modal__prev,
+.holu-modal__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background var(--holu-transition);
+  z-index: 1;
+}
+
+.holu-modal__prev:hover,
+.holu-modal__next:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.holu-modal__prev { left: 0.75rem; }
+.holu-modal__next { right: 0.75rem; }
+
+/* ── Modal body ───────────────────────────────────────────────────────────── */
+.holu-modal__body {
+  padding: 1.75rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.holu-modal__title {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--holu-text);
+  margin: 0;
+  padding-right: 2rem;
+}
+
+.holu-modal__content {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--holu-text-muted);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 560px) {
+  .holu-modal__body { padding: 1.25rem 1.25rem 1.5rem; }
+  .holu-card__cover { height: 170px; }
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .holu-card {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    transition: none !important;
+  }
+  .holu-modal__panel {
+    animation: none !important;
+  }
+}

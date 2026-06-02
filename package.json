@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@holu/cms-vite-plugin": "file:./packages/holu-cms-vite-plugin",
     "vite": "^8.0.12"
   }
 }

@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@holu/cms-vite-plugin':
+        specifier: file:./packages/holu-cms-vite-plugin
+        version: file:packages/holu-cms-vite-plugin(vite@8.0.16)
       vite:
         specifier: ^8.0.12
         version: 8.0.16
@@ -22,6 +25,11 @@ packages:
 
   '@emnapi/wasi-threads@1.2.1':
     resolution: {integrity: sha512-uTII7OYF+/Mes/MrcIOYp5yOtSMLBWSIoLPpcgwipoiKbli6k322tcoFsxoIIxPDqW01SQGAgko4EzZi2BNv2w==}
+
+  '@holu/cms-vite-plugin@file:packages/holu-cms-vite-plugin':
+    resolution: {directory: packages/holu-cms-vite-plugin, type: directory}
+    peerDependencies:
+      vite: '>=4.0.0'
 
   '@napi-rs/wasm-runtime@1.1.4':
     resolution: {integrity: sha512-3NQNNgA1YSlJb/kMH1ildASP9HW7/7kYnRI2szWJaofaS1hWmbGI4H+d3+22aGzXXN9IJ+n+GiFVcGipJP18ow==}
@@ -317,6 +325,10 @@ snapshots:
     dependencies:
       tslib: 2.8.1
     optional: true
+
+  '@holu/cms-vite-plugin@file:packages/holu-cms-vite-plugin(vite@8.0.16)':
+    dependencies:
+      vite: 8.0.16
 
   '@napi-rs/wasm-runtime@1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:
