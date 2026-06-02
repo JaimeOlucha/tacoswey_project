@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Servicios de Tacos Wey - Comida para llevar, catering, eventos y menú ejecutivo.">
+  <title>Servicios — Tacos Wey</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/services.css">
+  <style>
+    .services__hero {
+      background: linear-gradient(135deg, #FFF5F7 0%, #ffe8ec 100%);
+      border-radius: 16px;
+      padding: var(--spacing-2xl) var(--spacing-xl);
+      text-align: center;
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .services__hero h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--color-black);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .services__hero p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .services__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xl);
+    }
+
+    .services__card-large {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+      align-items: center;
+      background: var(--color-white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      transition: box-shadow var(--transition-base);
+    }
+
+    .services__card-large:hover {
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.1);
+    }
+
+    .services__card-image {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+    }
+
+    .services__card-info {
+      padding: var(--spacing-xl);
+    }
+
+    .services__card-icon-small {
+      display: inline-flex;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .services__card-icon-small--primary { background-color: var(--color-primary); }
+    .services__card-icon-small--secondary { background-color: var(--color-secondary); }
+    .services__card-icon-small--accent { background-color: #FF8C00; }
+
+    .services__card-icon-small svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--color-white);
+    }
+
+    .services__card-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      letter-spacing: 0.03em;
+      color: var(--color-black);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .services__card-info p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .services__card-info ul {
+      list-style: none;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .services__card-info ul li {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-size: 0.95rem;
+      color: #555;
+      padding: var(--spacing-xs) 0;
+    }
+
+    .services__card-info ul li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    .services__price-badge {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-primary);
+      background: #FFF5F7;
+      padding: 0.3rem 1rem;
+      border-radius: 8px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .services__card-info .btn {
+      margin-top: var(--spacing-sm);
+    }
+
+    @media (max-width: 768px) {
+      .services__card-large {
+        grid-template-columns: 1fr;
+      }
+
+      .services__card-image {
+        min-height: 220px;
+        max-height: 260px;
+      }
+
+      .services__card-info {
+        padding: var(--spacing-lg);
+      }
+
+      .services__hero {
+        padding: var(--spacing-lg) var(--spacing-md);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__container">
+      <a href="index.html" class="header__logo" aria-label="Tacos Wey - Inicio">
+        <div class="header__logo-icon">
+          <svg viewBox="65 200 114 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M125.376 202.253c-2.291.63-3.952 2.084-5.814 5.087-2.722 4.39-5.708 5.904-10.176 5.161-3.543-.589-6.028-.436-8.026.494-2.165 1.008-3.065 2.508-3.468 5.782l-.271 2.198-2.342.232c-2.876.284-5.16 1.346-6.404 2.977-.835 1.092-.943 1.535-.943 3.857 0 1.443.117 3.037.259 3.544.242.865.174.936-1.112 1.153-1.985.335-4.091 1.999-4.929 3.893-.565 1.277-.659 1.976-.471 3.522.03.245.058.473.084.686.218 1.765.304 2.459-.003 2.807-.236.267-.704.33-1.522.516-3.777.863-5.974 3.396-5.974 6.889 0 2.393.574 3.838 2.273 5.718 1.475 1.632 4.083 3.291 4.764 3.03.803-.308 2.882-4.804 4.032-8.72 3.178-10.819 7.597-18.532 14.686-25.638 8.836-8.854 18.226-13.088 30.034-13.54 7.983-.306 14.041.803 20.231 3.704 10.865 5.092 21.283 16.806 25.155 28.284.435 1.29.933 2.331 1.105 2.313.684-.071 1.947-3.017 2.122-4.952.29-3.191-.549-5.186-3.265-7.763-2.859-2.712-3.214-3.55-3.214-7.588 0-2.787-.124-3.479-.901-5.039-1.548-3.106-4.061-4.491-8.875-4.891-3.578-.297-4.086-.636-5.47-3.644-2.176-4.733-4.505-6.534-8.44-6.529-1.666.003-2.665.263-4.904 1.277-4.251 1.925-4.802 1.813-8.493-1.721-1.27-1.215-2.827-2.423-3.461-2.684-1.81-.745-4.435-.919-6.268-.415z" fill="#20C9B6"/>
+            <path d="M106.007 203.513c-3.004.751-6.271 3.427-7.105 5.82l-.332.953 1.947-.665c1.701-.58 2.476-.632 6.101-.408 6.519.404 6.536.402 8.093-.628 1.771-1.172 1.802-1.959.125-3.118-2.708-1.869-6.134-2.628-8.829-1.954z" fill="#20C9B6"/>
+            <path d="M88.218 211.458c-3.002.629-5.575 2.72-7.06 5.738-.676 1.374-.848 2.293-.889 4.756l-.05 3.052-3.244 3.045c-6.911 6.486-11.5 15.072-11.939 22.338-.431 7.136 2.989 13.874 8.444 16.636l1.995 1.011h89.98l2.317-1.14c6.436-3.169 8.076-10.153 4.892-20.832-2.533-8.494-8.858-17.391-16.393-23.056-16.16-12.15-37.923-10.505-53.081 4.014-6.799 6.511-11.47 14.544-14.593 25.097-2.382 8.051-6.286 13.397-10.161 13.917-2.323.311-2.951-2.046-.798-2.993 1.385-.61 1.397-.773.097-1.349-1.887-.835-4.442-3.473-5.556-5.736-1.236-2.511-1.493-5.507-.708-8.269.612-2.155 2.889-4.688 5.18-5.761l1.766-.827v-2.295c0-3.657 1.858-6.702 5.007-8.206 1.01-.482 1.049-.586 1.065-2.812.033-4.638 3.064-8.227 7.976-9.444 1.829-.453 2.201-.773 2.21-1.9.002-.4.383-1.438.845-2.308l.841-1.581-1.31-.524c-1.698-.679-5.002-.955-6.833-.571z" fill="#E40046"/>
+          </svg>
+        </div>
+        <div class="header__logo-text">
+          <span class="header__logo-title">TACOS WEY</span>
+          <span class="header__logo-subtitle">Tus tacos más chingones</span>
+        </div>
+      </a>
+
+      <button class="nav__toggle js-nav-toggle" aria-label="Abrir menú">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+
+      <nav class="nav__menu js-nav-menu">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link js-nav-link">Inicio</a></li>
+          <li><a href="nosotros.html" class="nav__link js-nav-link">Nosotros</a></li>
+          <li><a href="servicios.html" class="nav__link nav__link--active js-nav-link">Servicios</a></li>
+          <li><a href="menu.html" class="nav__link js-nav-link">El Menú</a></li>
+          <li><a href="blog.html" class="nav__link js-nav-link">Blog</a></li>
+          <li><a href="contacto.html" class="nav__link js-nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section--page">
+      <div class="section__container">
+        <div class="section__header">
+          <span class="section__tag">Qué ofrecemos</span>
+          <h1 class="section__title">Servicios</h1>
+          <p class="section__subtitle">Todo lo que necesitas para disfrutar el mejor taco, donde y cuando quieras</p>
+        </div>
+
+        <div class="services__hero">
+          <h2>¿Antojo de tacos? Nosotros nos encargamos</h2>
+          <p>Ya sea que quieras comer en casa, celebrar un evento o disfrutar de una comida rápida entre semana, tenemos el servicio perfecto para ti.</p>
+        </div>
+
+        <div class="services__list">
+          <div class="services__card-large">
+            <img class="services__card-image" src="assets/img_tacoswey_jpg/parallevar_tacoswey.jpg" alt="Comida para llevar" loading="lazy">
+            <div class="services__card-info">
+              <div class="services__card-icon-small services__card-icon-small--primary">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+              </div>
+              <h3>Comida para llevar</h3>
+              <p>¿Con antojo pero sin tiempo? Ordena por teléfono o WhatsApp y pasa por tus tacos. Los empacamos con cuidado para que lleguen calientitos.</p>
+              <ul>
+                <li>Ordena por WhatsApp o llamada al +52 55 1234 5678</li>
+                <li>Tiempo de preparación: 15–20 minutos</li>
+                <li>Empaque especial que mantiene la temperatura</li>
+                <li>Salsas y limón incluidos sin costo extra</li>
+              </ul>
+              <p style="font-size: 0.9rem; color: #999;"><strong>Horario:</strong> Lun–Sáb 10:00–22:00 | Dom 11:00–21:00</p>
+              <a href="contacto.html" class="btn btn--primary">Ordena ahora</a>
+            </div>
+          </div>
+
+          <div class="services__card-large" style="direction: rtl;">
+            <img class="services__card-image" src="assets/img_tacoswey_jpg/camiseta-tacoswey.jpg" alt="Catering para eventos" loading="lazy" style="direction: ltr;">
+            <div class="services__card-info" style="direction: ltr;">
+              <div class="services__card-icon-small services__card-icon-small--secondary">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              </div>
+              <h3>Eventos y catering</h3>
+              <p>Haz de tu evento algo inolvidable con nuestro servicio de catering. Tacos, música y el mejor ambiente para bodas, cumpleaños y eventos empresariales.</p>
+              <ul>
+                <li>Menús personalizados según número de invitados</li>
+                <li>Opción de taquero en vivo con comal y trompo</li>
+                <li>Incluye montaje, servicio y recogida</li>
+                <li>Disponible en CDMX y zona metropolitana</li>
+              </ul>
+              <p style="font-size: 0.9rem; color: #999;">Cotiza tu evento sin compromiso. Entre más grande la fiesta, mejor el precio.</p>
+              <a href="contacto.html" class="btn btn--primary">Cotizar evento</a>
+            </div>
+          </div>
+
+          <div class="services__card-large">
+            <img class="services__card-image" src="assets/img_tacoswey_jpg/comidallevar_tacoswey.jpeg" alt="Menú ejecutivo" loading="lazy">
+            <div class="services__card-info">
+              <div class="services__card-icon-small services__card-icon-small--accent">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 6h-2v3h-2V6h-2V4h2V1h2v3h2v2zm-10-2H3v2h8V4zm0 4H3v2h8V8zm0 4H3v2h8v-2zm0 4H3v2h8v-2zm10-4h-8v2h8v-2zm0 4h-8v2h8v-2z"/></svg>
+              </div>
+              <h3>Menú ejecutivo</h3>
+              <p>De lunes a viernes de 1:00 PM a 5:00 PM, disfruta de nuestro menú ejecutivo. Una comida completa a un precio que no te va a doler.</p>
+              <div class="services__price-badge">Desde $89</div>
+              <ul>
+                <li><strong>Opción 1:</strong> 3 tacos de pastor + bebida + postre — $89</li>
+                <li><strong>Opción 2:</strong> 3 tacos de suadero + bebida + postre — $99</li>
+                <li><strong>Opción 3:</strong> 3 tacos mixtos + bebida + postre — $109</li>
+              </ul>
+              <p style="font-size: 0.9rem; color: #999;">Válido en el local. Incluye salsa y limón al gusto. Pregunta por el postre del día.</p>
+              <a href="menu.html" class="btn btn--primary">Ver menú</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__top">
+        <div>
+          <div class="header__logo" style="display: inline-flex;">
+            <div class="header__logo-icon" style="width: 40px; height: 40px;">
+              <svg viewBox="65 200 114 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M125.376 202.253c-2.291.63-3.952 2.084-5.814 5.087-2.722 4.39-5.708 5.904-10.176 5.161-3.543-.589-6.028-.436-8.026.494-2.165 1.008-3.065 2.508-3.468 5.782l-.271 2.198-2.342.232c-2.876.284-5.16 1.346-6.404 2.977-.835 1.092-.943 1.535-.943 3.857 0 1.443.117 3.037.259 3.544.242.865.174.936-1.112 1.153-1.985.335-4.091 1.999-4.929 3.893-.565 1.277-.659 1.976-.471 3.522.03.245.058.473.084.686.218 1.765.304 2.459-.003 2.807-.236.267-.704.33-1.522.516-3.777.863-5.974 3.396-5.974 6.889 0 2.393.574 3.838 2.273 5.718 1.475 1.632 4.083 3.291 4.764 3.03.803-.308 2.882-4.804 4.032-8.72 3.178-10.819 7.597-18.532 14.686-25.638 8.836-8.854 18.226-13.088 30.034-13.54 7.983-.306 14.041.803 20.231 3.704 10.865 5.092 21.283 16.806 25.155 28.284.435 1.29.933 2.331 1.105 2.313.684-.071 1.947-3.017 2.122-4.952.29-3.191-.549-5.186-3.265-7.763-2.859-2.712-3.214-3.55-3.214-7.588 0-2.787-.124-3.479-.901-5.039-1.548-3.106-4.061-4.491-8.875-4.891-3.578-.297-4.086-.636-5.47-3.644-2.176-4.733-4.505-6.534-8.44-6.529-1.666.003-2.665.263-4.904 1.277-4.251 1.925-4.802 1.813-8.493-1.721-1.27-1.215-2.827-2.423-3.461-2.684-1.81-.745-4.435-.919-6.268-.415z" fill="#20C9B6"/>
+                <path d="M106.007 203.513c-3.004.751-6.271 3.427-7.105 5.82l-.332.953 1.947-.665c1.701-.58 2.476-.632 6.101-.408 6.519.404 6.536.402 8.093-.628 1.771-1.172 1.802-1.959.125-3.118-2.708-1.869-6.134-2.628-8.829-1.954z" fill="#20C9B6"/>
+                <path d="M88.218 211.458c-3.002.629-5.575 2.72-7.06 5.738-.676 1.374-.848 2.293-.889 4.756l-.05 3.052-3.244 3.045c-6.911 6.486-11.5 15.072-11.939 22.338-.431 7.136 2.989 13.874 8.444 16.636l1.995 1.011h89.98l2.317-1.14c6.436-3.169 8.076-10.153 4.892-20.832-2.533-8.494-8.858-17.391-16.393-23.056-16.16-12.15-37.923-10.505-53.081 4.014-6.799 6.511-11.47 14.544-14.593 25.097-2.382 8.051-6.286 13.397-10.161 13.917-2.323.311-2.951-2.046-.798-2.993 1.385-.61 1.397-.773.097-1.349-1.887-.835-4.442-3.473-5.556-5.736-1.236-2.511-1.493-5.507-.708-8.269.612-2.155 2.889-4.688 5.18-5.761l1.766-.827v-2.295c0-3.657 1.858-6.702 5.007-8.206 1.01-.482 1.049-.586 1.065-2.812.033-4.638 3.064-8.227 7.976-9.444 1.829-.453 2.201-.773 2.21-1.9.002-.4.383-1.438.845-2.308l.841-1.581-1.31-.524c-1.698-.679-5.002-.955-6.833-.571z" fill="#E40046"/>
+              </svg>
+            </div>
+            <div class="header__logo-text">
+              <span class="header__logo-title" style="color: var(--color-secondary);">TACOS WEY</span>
+              <span class="header__logo-subtitle">Tus tacos más chingones</span>
+            </div>
+          </div>
+          <p class="footer__brand-text">La taquería más auténtica de la ciudad. Hecha con amor, sazón y un chingo de sabor mexicano.</p>
+        </div>
+        <div>
+          <h4 class="footer__heading">Enlaces</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link">Inicio</a>
+            <a href="nosotros.html" class="footer__link">Nosotros</a>
+            <a href="servicios.html" class="footer__link">Servicios</a>
+            <a href="menu.html" class="footer__link">El Menú</a>
+            <a href="blog.html" class="footer__link">Blog</a>
+            <a href="contacto.html" class="footer__link">Contacto</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Legal</h4>
+          <div class="footer__links">
+            <a href="#" class="footer__link">Aviso de privacidad</a>
+            <a href="#" class="footer__link">Términos y condiciones</a>
+            <a href="#" class="footer__link">Política de cookies</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Síguenos</h4>
+          <div class="footer__links">
+            <a href="#" class="footer__link">Facebook</a>
+            <a href="#" class="footer__link">Instagram</a>
+            <a href="#" class="footer__link">Twitter / X</a>
+            <a href="#" class="footer__link">TikTok</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 Tacos Wey. Todos los derechos reservados.</span>
+        <div class="footer__bottom-links">
+          <a href="#" class="footer__link">Aviso de privacidad</a>
+          <a href="#" class="footer__link">Términos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

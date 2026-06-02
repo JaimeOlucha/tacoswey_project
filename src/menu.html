@@ -1,0 +1,545 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Menú de Tacos Wey - Tacos, especialidades, bebidas y postres. Todos los sabores de México.">
+  <title>El Menú — Tacos Wey</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <style>
+    .menu-restaurant {
+      background: #FFF8F0;
+      padding: var(--spacing-xl) 0 var(--spacing-2xl);
+    }
+
+    .menu-restaurant .section__container {
+      max-width: 1100px;
+    }
+
+    .menu-restaurant__header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .menu-restaurant__logo {
+      width: 120px;
+      height: auto;
+      margin: 0 auto var(--spacing-md);
+      display: block;
+    }
+
+    .menu-restaurant__brand {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      letter-spacing: 0.08em;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .menu-restaurant__tagline {
+      font-size: 1rem;
+      color: #888;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .menu-restaurant__divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-md);
+      margin: var(--spacing-lg) 0;
+      color: var(--color-secondary);
+    }
+
+    .menu-restaurant__divider-line {
+      flex: 1;
+      max-width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+    }
+
+    .menu-restaurant__divider-icon {
+      font-size: 1.2rem;
+      opacity: 0.6;
+    }
+
+    .menu-restaurant__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl) var(--spacing-2xl);
+    }
+
+    .menu-restaurant__category {
+      break-inside: avoid;
+    }
+
+    .menu-restaurant__category-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      letter-spacing: 0.06em;
+      color: var(--color-primary);
+      border-bottom: 3px solid var(--color-primary);
+      padding-bottom: var(--spacing-sm);
+      margin-bottom: var(--spacing-lg);
+      position: relative;
+    }
+
+    .menu-restaurant__category-title::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--color-secondary);
+    }
+
+    .menu-restaurant__items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+
+    .menu-restaurant__item {
+      cursor: pointer;
+      transition: transform var(--transition-fast);
+    }
+
+    .menu-restaurant__item:hover {
+      transform: translateX(4px);
+    }
+
+    .menu-restaurant__item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--spacing-sm);
+      margin-bottom: 4px;
+    }
+
+    .menu-restaurant__item-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      color: #2D2D2D;
+      white-space: nowrap;
+    }
+
+    .menu-restaurant__item-dots {
+      flex: 1;
+      border-bottom: 2px dotted #DDD;
+      min-width: 20px;
+      height: 0.7em;
+      margin: 0 var(--spacing-xs);
+    }
+
+    .menu-restaurant__item-price {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--color-primary);
+      white-space: nowrap;
+    }
+
+    .menu-restaurant__item-desc {
+      font-size: 0.82rem;
+      color: #888;
+      line-height: 1.5;
+      padding-right: var(--spacing-md);
+    }
+
+    .menu-restaurant__item-badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.6rem;
+      border-radius: 50px;
+      background: var(--color-secondary);
+      color: var(--color-white);
+      margin-left: var(--spacing-xs);
+      vertical-align: middle;
+    }
+
+    .menu-restaurant__item-badge--primary {
+      background: var(--color-primary);
+    }
+
+    .menu-restaurant__footer-note {
+      text-align: center;
+      margin-top: var(--spacing-2xl);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid #EEE;
+      font-size: 0.85rem;
+      color: #AAA;
+      letter-spacing: 0.05em;
+    }
+
+    .menu-restaurant__footer-note strong {
+      color: var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+      .menu-restaurant__grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+      }
+
+      .menu-restaurant__logo {
+        width: 80px;
+      }
+
+      .menu-restaurant__header {
+        margin-bottom: var(--spacing-lg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__container">
+      <a href="index.html" class="header__logo" aria-label="Tacos Wey - Inicio">
+        <div class="header__logo-icon">
+          <svg viewBox="65 200 114 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M125.376 202.253c-2.291.63-3.952 2.084-5.814 5.087-2.722 4.39-5.708 5.904-10.176 5.161-3.543-.589-6.028-.436-8.026.494-2.165 1.008-3.065 2.508-3.468 5.782l-.271 2.198-2.342.232c-2.876.284-5.16 1.346-6.404 2.977-.835 1.092-.943 1.535-.943 3.857 0 1.443.117 3.037.259 3.544.242.865.174.936-1.112 1.153-1.985.335-4.091 1.999-4.929 3.893-.565 1.277-.659 1.976-.471 3.522.03.245.058.473.084.686.218 1.765.304 2.459-.003 2.807-.236.267-.704.33-1.522.516-3.777.863-5.974 3.396-5.974 6.889 0 2.393.574 3.838 2.273 5.718 1.475 1.632 4.083 3.291 4.764 3.03.803-.308 2.882-4.804 4.032-8.72 3.178-10.819 7.597-18.532 14.686-25.638 8.836-8.854 18.226-13.088 30.034-13.54 7.983-.306 14.041.803 20.231 3.704 10.865 5.092 21.283 16.806 25.155 28.284.435 1.29.933 2.331 1.105 2.313.684-.071 1.947-3.017 2.122-4.952.29-3.191-.549-5.186-3.265-7.763-2.859-2.712-3.214-3.55-3.214-7.588 0-2.787-.124-3.479-.901-5.039-1.548-3.106-4.061-4.491-8.875-4.891-3.578-.297-4.086-.636-5.47-3.644-2.176-4.733-4.505-6.534-8.44-6.529-1.666.003-2.665.263-4.904 1.277-4.251 1.925-4.802 1.813-8.493-1.721-1.27-1.215-2.827-2.423-3.461-2.684-1.81-.745-4.435-.919-6.268-.415z" fill="#20C9B6"/>
+            <path d="M106.007 203.513c-3.004.751-6.271 3.427-7.105 5.82l-.332.953 1.947-.665c1.701-.58 2.476-.632 6.101-.408 6.519.404 6.536.402 8.093-.628 1.771-1.172 1.802-1.959.125-3.118-2.708-1.869-6.134-2.628-8.829-1.954z" fill="#20C9B6"/>
+            <path d="M88.218 211.458c-3.002.629-5.575 2.72-7.06 5.738-.676 1.374-.848 2.293-.889 4.756l-.05 3.052-3.244 3.045c-6.911 6.486-11.5 15.072-11.939 22.338-.431 7.136 2.989 13.874 8.444 16.636l1.995 1.011h89.98l2.317-1.14c6.436-3.169 8.076-10.153 4.892-20.832-2.533-8.494-8.858-17.391-16.393-23.056-16.16-12.15-37.923-10.505-53.081 4.014-6.799 6.511-11.47 14.544-14.593 25.097-2.382 8.051-6.286 13.397-10.161 13.917-2.323.311-2.951-2.046-.798-2.993 1.385-.61 1.397-.773.097-1.349-1.887-.835-4.442-3.473-5.556-5.736-1.236-2.511-1.493-5.507-.708-8.269.612-2.155 2.889-4.688 5.18-5.761l1.766-.827v-2.295c0-3.657 1.858-6.702 5.007-8.206 1.01-.482 1.049-.586 1.065-2.812.033-4.638 3.064-8.227 7.976-9.444 1.829-.453 2.201-.773 2.21-1.9.002-.4.383-1.438.845-2.308l.841-1.581-1.31-.524c-1.698-.679-5.002-.955-6.833-.571z" fill="#E40046"/>
+          </svg>
+        </div>
+        <div class="header__logo-text">
+          <span class="header__logo-title">TACOS WEY</span>
+          <span class="header__logo-subtitle">Tus tacos más chingones</span>
+        </div>
+      </a>
+
+      <button class="nav__toggle js-nav-toggle" aria-label="Abrir menú de navegación">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+
+      <nav class="nav__menu js-nav-menu">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link js-nav-link">Inicio</a></li>
+          <li><a href="nosotros.html" class="nav__link js-nav-link">Nosotros</a></li>
+          <li><a href="servicios.html" class="nav__link js-nav-link">Servicios</a></li>
+          <li><a href="menu.html" class="nav__link nav__link--active js-nav-link">El Menú</a></li>
+          <li><a href="blog.html" class="nav__link js-nav-link">Blog</a></li>
+          <li><a href="contacto.html" class="nav__link js-nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="menu-restaurant">
+      <div class="section__container">
+
+        <div class="menu-restaurant__header">
+          <img class="menu-restaurant__logo" src="assets/img_tacoswey_jpg/logo-menu-tacoswey.jpg" alt="Tacos Wey" loading="eager">
+          <div class="menu-restaurant__brand">TACOS WEY</div>
+          <div class="menu-restaurant__tagline">Tus tacos más chingones</div>
+        </div>
+
+        <div class="menu-restaurant__divider">
+          <span class="menu-restaurant__divider-line"></span>
+          <svg class="menu-restaurant__divider-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#20C9B6"/></svg>
+          <span class="menu-restaurant__divider-line"></span>
+        </div>
+
+        <div class="menu-restaurant__grid">
+
+          <div class="menu-restaurant__category">
+            <h2 class="menu-restaurant__category-title">Tacos</h2>
+            <div class="menu-restaurant__items">
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Taco al Pastor <span class="menu-restaurant__item-badge menu-restaurant__item-badge--primary">Más vendido</span></span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$39</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Cerdo marinado con achiote, piña asada, cilantro y cebolla</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Taco de Suadero</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$45</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Carne de res confitada lentamente, cebolla y salsa verde</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Taco de Canasta</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$29</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Guisado tradicional en manteca — papa, chicharrón y frijoles</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Taco de Costra <span class="menu-restaurant__item-badge menu-restaurant__item-badge--primary">Nuevo</span></span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$59</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Queso gratinado, pastor y piña caramelizada</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Taco de Campechano</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$49</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Mezcla irresistible de suadero, chorizo y longaniza</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Taco al Carbón</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$55</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Carne asada al carbón con nopales asados y salsa roja</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-restaurant__category">
+            <h2 class="menu-restaurant__category-title">Bebidas</h2>
+            <div class="menu-restaurant__items">
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Agua de Horchata</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$35</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Arroz, canela y vainilla. Refrescante y cremosa</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Michelada Clásica <span class="menu-restaurant__item-badge">Popular</span></span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$59</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Cerveza con limón, sal, chamoy y salsa picante</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Jamaica Fresca</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$29</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Flor de jamaica endulzada, servida con hielo y limón</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Margarita de la Casa <span class="menu-restaurant__item-badge menu-restaurant__item-badge--primary">Premium</span></span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$79</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Tequila, triple sec, limón fresco y sal de chapulín</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Agua de Tamarindo</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$35</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Tamarindo natural con piloncillo y chile en polvo</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Soda Mexicana</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$25</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Coca de vidrio, Jarritos o Sidral Mundet bien fría</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-restaurant__category">
+            <h2 class="menu-restaurant__category-title">Entrantes</h2>
+            <div class="menu-restaurant__items">
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Guacamole Tradicional <span class="menu-restaurant__item-badge">Clásico</span></span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$65</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Aguacate fresco con tomate, cebolla, cilantro y limón. Acompañado de totopos</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Nachos Supremos <span class="menu-restaurant__item-badge">Comparte</span></span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$89</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Totopos bañados en queso, frijoles refritos, guacamole y jalapeño</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Quesadillas de Hongos</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$55</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Hongos salteados con epazote y queso Oaxaca derretido</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Tostadas de Ceviche</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$69</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Ceviche de camarón fresco con tostada crujiente y aguacate</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Sopes de Picadillo</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$49</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Sopes gruesos de maíz con picadillo, crema, queso y lechuga</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Elote Callejero</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$35</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Elote asado con mayonesa, queso cotija, chile y limón</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-restaurant__category">
+            <h2 class="menu-restaurant__category-title">Postres</h2>
+            <div class="menu-restaurant__items">
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Flan Casero <span class="menu-restaurant__item-badge menu-restaurant__item-badge--primary">Imperdible</span></span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$39</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Flan de vainilla con cajeta y nuez caramelizada</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Churros con Chocolate</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$45</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Churros crujientes bañados en azúcar con chocolate caliente</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Pastel de Tres Leches</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$49</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Bizcocho esponjoso bañado en tres leches con crema batida</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Arroz con Leche</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$35</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Arroz cremoso con canela, pasitas y ralladura de limón</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Tamal de Elote</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$39</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Tamal dulce de elote con crema y fresas</p>
+              </div>
+              <div class="menu-restaurant__item">
+                <div class="menu-restaurant__item-top">
+                  <span class="menu-restaurant__item-name">Mango con Chile</span>
+                  <span class="menu-restaurant__item-dots"></span>
+                  <span class="menu-restaurant__item-price">$29</span>
+                </div>
+                <p class="menu-restaurant__item-desc">Mango fresco en gajos con chile piquín y limón</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="menu-restaurant__footer-note">
+          ⋆ &#8203; &#8203; <strong>Gracias por preferir Tacos Wey</strong> &#8203; &#8203; ⋆
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__top">
+        <div>
+          <div class="header__logo" style="display: inline-flex;">
+            <div class="header__logo-icon" style="width: 40px; height: 40px;">
+              <svg viewBox="65 200 114 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M125.376 202.253c-2.291.63-3.952 2.084-5.814 5.087-2.722 4.39-5.708 5.904-10.176 5.161-3.543-.589-6.028-.436-8.026.494-2.165 1.008-3.065 2.508-3.468 5.782l-.271 2.198-2.342.232c-2.876.284-5.16 1.346-6.404 2.977-.835 1.092-.943 1.535-.943 3.857 0 1.443.117 3.037.259 3.544.242.865.174.936-1.112 1.153-1.985.335-4.091 1.999-4.929 3.893-.565 1.277-.659 1.976-.471 3.522.03.245.058.473.084.686.218 1.765.304 2.459-.003 2.807-.236.267-.704.33-1.522.516-3.777.863-5.974 3.396-5.974 6.889 0 2.393.574 3.838 2.273 5.718 1.475 1.632 4.083 3.291 4.764 3.03.803-.308 2.882-4.804 4.032-8.72 3.178-10.819 7.597-18.532 14.686-25.638 8.836-8.854 18.226-13.088 30.034-13.54 7.983-.306 14.041.803 20.231 3.704 10.865 5.092 21.283 16.806 25.155 28.284.435 1.29.933 2.331 1.105 2.313.684-.071 1.947-3.017 2.122-4.952.29-3.191-.549-5.186-3.265-7.763-2.859-2.712-3.214-3.55-3.214-7.588 0-2.787-.124-3.479-.901-5.039-1.548-3.106-4.061-4.491-8.875-4.891-3.578-.297-4.086-.636-5.47-3.644-2.176-4.733-4.505-6.534-8.44-6.529-1.666.003-2.665.263-4.904 1.277-4.251 1.925-4.802 1.813-8.493-1.721-1.27-1.215-2.827-2.423-3.461-2.684-1.81-.745-4.435-.919-6.268-.415z" fill="#20C9B6"/>
+                <path d="M106.007 203.513c-3.004.751-6.271 3.427-7.105 5.82l-.332.953 1.947-.665c1.701-.58 2.476-.632 6.101-.408 6.519.404 6.536.402 8.093-.628 1.771-1.172 1.802-1.959.125-3.118-2.708-1.869-6.134-2.628-8.829-1.954z" fill="#20C9B6"/>
+                <path d="M88.218 211.458c-3.002.629-5.575 2.72-7.06 5.738-.676 1.374-.848 2.293-.889 4.756l-.05 3.052-3.244 3.045c-6.911 6.486-11.5 15.072-11.939 22.338-.431 7.136 2.989 13.874 8.444 16.636l1.995 1.011h89.98l2.317-1.14c6.436-3.169 8.076-10.153 4.892-20.832-2.533-8.494-8.858-17.391-16.393-23.056-16.16-12.15-37.923-10.505-53.081 4.014-6.799 6.511-11.47 14.544-14.593 25.097-2.382 8.051-6.286 13.397-10.161 13.917-2.323.311-2.951-2.046-.798-2.993 1.385-.61 1.397-.773.097-1.349-1.887-.835-4.442-3.473-5.556-5.736-1.236-2.511-1.493-5.507-.708-8.269.612-2.155 2.889-4.688 5.18-5.761l1.766-.827v-2.295c0-3.657 1.858-6.702 5.007-8.206 1.01-.482 1.049-.586 1.065-2.812.033-4.638 3.064-8.227 7.976-9.444 1.829-.453 2.201-.773 2.21-1.9.002-.4.383-1.438.845-2.308l.841-1.581-1.31-.524c-1.698-.679-5.002-.955-6.833-.571z" fill="#E40046"/>
+              </svg>
+            </div>
+            <div class="header__logo-text">
+              <span class="header__logo-title" style="color: var(--color-secondary);">TACOS WEY</span>
+              <span class="header__logo-subtitle">Tus tacos más chingones</span>
+            </div>
+          </div>
+          <p class="footer__brand-text">La taquería más auténtica de la ciudad. Hecha con amor, sazón y un chingo de sabor mexicano.</p>
+        </div>
+        <div>
+          <h4 class="footer__heading">Enlaces</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link">Inicio</a>
+            <a href="nosotros.html" class="footer__link">Nosotros</a>
+            <a href="servicios.html" class="footer__link">Servicios</a>
+            <a href="menu.html" class="footer__link">El Menú</a>
+            <a href="blog.html" class="footer__link">Blog</a>
+            <a href="contacto.html" class="footer__link">Contacto</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Legal</h4>
+          <div class="footer__links">
+            <a href="#" class="footer__link">Aviso de privacidad</a>
+            <a href="#" class="footer__link">Términos y condiciones</a>
+            <a href="#" class="footer__link">Política de cookies</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Síguenos</h4>
+          <div class="footer__links">
+            <a href="#" class="footer__link">Facebook</a>
+            <a href="#" class="footer__link">Instagram</a>
+            <a href="#" class="footer__link">Twitter / X</a>
+            <a href="#" class="footer__link">TikTok</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 Tacos Wey. Todos los derechos reservados.</span>
+        <div class="footer__bottom-links">
+          <a href="#" class="footer__link">Aviso de privacidad</a>
+          <a href="#" class="footer__link">Términos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
