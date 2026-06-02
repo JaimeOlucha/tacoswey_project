@@ -142,6 +142,20 @@
   font-size: 0.85rem;
 }
 
+.blog__card-image--placeholder {
+  height: 220px;
+  background: #f0f0f0;
+}
+
+.blog__loading,
+.blog__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  color: #999;
+  font-size: 1rem;
+}
+
 @media (max-width: 768px) {
   .blog__grid {
     grid-template-columns: 1fr;

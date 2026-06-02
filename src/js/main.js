@@ -1,6 +1,6 @@
 import { Navigation } from './modules/navigation.js'
 import { MenuTabs } from './modules/menu.js'
-import { initBlog } from './modules/blog.js'
+import { initHoluCms } from './modules/holuCms.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   const nav = new Navigation()
@@ -11,6 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (document.querySelector('.js-blog-grid')) {
-    initBlog()
+    initHoluCms()
   }
 })
